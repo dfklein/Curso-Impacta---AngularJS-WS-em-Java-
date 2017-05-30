@@ -1,5 +1,6 @@
 package br.com.denis.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -11,7 +12,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
-import br.com.denis.entity.Produto;
+import br.com.denis.entity.ProdutoORM;
+import br.com.denis.http.Produto;
 import br.com.denis.repository.ProdutoRepository;
 
 /**
@@ -37,13 +39,13 @@ public class ServiceController {
 	public String cadastrar(Produto produto) {
 		
 		try {
-			Produto entity = new Produto();
+			ProdutoORM entity = new ProdutoORM();
 			
 			entity.setDescricao(produto.getDescricao());
 			entity.setDataCriacao(produto.getDataCriacao());
 			entity.setPreco(produto.getPreco());
 			
-			rep.insert(produto);
+			rep.insert(entity);
 			
 			return "Registro cadastrado com sucesso";
 		} catch (Exception e) {
@@ -62,13 +64,13 @@ public class ServiceController {
 	@Path("/alterar")
 	public String alterar(Produto produto) {
 		try {
-			Produto entity = new Produto();
+			ProdutoORM entity = new ProdutoORM();
 			
 			entity.setDescricao(produto.getDescricao());
 			entity.setDataCriacao(produto.getDataCriacao());
 			entity.setPreco(produto.getPreco());
 			
-			rep.update(produto);
+			rep.update(entity);
 			
 			return "Registro alterado com sucesso";
 		} catch (Exception e) {
@@ -84,7 +86,16 @@ public class ServiceController {
 	@Produces("application/json; charset=UTF-8")
 	@Path("/todosProdutos")
 	public List<Produto> todosProdutos(){
-		return rep.listAll();
+		List<Produto> pessoas =  new ArrayList<Produto>();
+		 
+		List<ProdutoORM> listaEntityPessoas = rep.listAll();
+ 
+		for (ProdutoORM entity : listaEntityPessoas) {
+ 
+			pessoas.add(new Produto(entity.getId(), entity.getDescricao(), entity.getDataCriacao(), entity.getPreco()));
+		}
+ 
+		return pessoas;
 	}
  
 	/**
@@ -93,12 +104,12 @@ public class ServiceController {
 	@GET
 	@Produces("application/json; charset=UTF-8")
 	@Path("/getProduto/{id}")
-	public Produto findById(@PathParam("codigo") Long id){
+	public Produto findById(@PathParam("id") Long id){
  
-		Produto produto = rep.findById(id);
- 
-		if(produto != null)
-			return produto;
+		ProdutoORM entity = rep.findById(id);
+		 
+		if(entity != null)
+			return new Produto(entity.getId(), entity.getDescricao(), entity.getDataCriacao(), entity.getPreco());
  
 		return null;
 	}

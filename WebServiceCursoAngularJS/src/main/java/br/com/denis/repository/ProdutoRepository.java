@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import br.com.denis.entity.Produto;
+import br.com.denis.entity.ProdutoORM;
 
 public class ProdutoRepository {
 	
@@ -24,27 +24,27 @@ public class ProdutoRepository {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Produto> listAll() {
+	public List<ProdutoORM> listAll() {
 		return this.entityManager.createQuery("SELECT p FROM Produto p ORDER BY p.id").getResultList();
 	}
 	
 	/**
 	 * CRIA UM NOVO REGISTRO NO BANCO DE DADOS
 	 * */
-	public void insert(Produto produto) {
+	public void insert(ProdutoORM produto) {
  
 		this.entityManager.getTransaction().begin();
 		this.entityManager.persist(produto);
 		this.entityManager.getTransaction().commit();
 	}
 	
-	public void insert(List<Produto> listProdutos) {
-		for (Produto produto : listProdutos) {
+	public void insert(List<ProdutoORM> listProdutos) {
+		for (ProdutoORM produto : listProdutos) {
 			insert(produto);
 		}
 	}
 	
-	public void update(Produto produto) {
+	public void update(ProdutoORM produto) {
 		this.entityManager.getTransaction().begin();
 		this.entityManager.merge(produto);
 		this.entityManager.getTransaction().commit();
@@ -52,7 +52,7 @@ public class ProdutoRepository {
 	}
 	
 	public void remove(Long id) {
-		Produto produto = findById(id);
+		ProdutoORM produto = findById(id);
 		
 		this.entityManager.getTransaction().begin();
 		this.entityManager.remove(produto);
@@ -60,14 +60,14 @@ public class ProdutoRepository {
 		
 	}
 	
-	public Produto findById(Long id) {
-		return this.entityManager.find(Produto.class, id);
+	public ProdutoORM findById(Long id) {
+		return this.entityManager.find(ProdutoORM.class, id);
 	}
 
 	private void criarMassaTeste() {
-		Produto p1 = new Produto();
-		Produto p2 = new Produto();
-		Produto p3 = new Produto();
+		ProdutoORM p1 = new ProdutoORM();
+		ProdutoORM p2 = new ProdutoORM();
+		ProdutoORM p3 = new ProdutoORM();
 		
 		p1.setDescricao("Sabão em pó");
 		p1.setPreco(10.0);
