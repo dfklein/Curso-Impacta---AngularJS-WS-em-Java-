@@ -9,13 +9,13 @@ import javax.persistence.Persistence;
 
 import br.com.denis.entity.Produto;
 
-public class PessoaRepository {
+public class ProdutoRepository {
 	
 	private final EntityManagerFactory entityManagerFactory;
 	 
 	private final EntityManager entityManager;
  
-	public PessoaRepository() {
+	public ProdutoRepository() {
 		this.entityManagerFactory = Persistence.createEntityManagerFactory("h2");
 		 
 		this.entityManager = this.entityManagerFactory.createEntityManager();
@@ -44,6 +44,26 @@ public class PessoaRepository {
 		}
 	}
 	
+	public void update(Produto produto) {
+		this.entityManager.getTransaction().begin();
+		this.entityManager.merge(produto);
+		this.entityManager.getTransaction().commit();
+		
+	}
+	
+	public void remove(Long id) {
+		Produto produto = findById(id);
+		
+		this.entityManager.getTransaction().begin();
+		this.entityManager.remove(produto);
+		this.entityManager.getTransaction().commit();
+		
+	}
+	
+	public Produto findById(Long id) {
+		return this.entityManager.find(Produto.class, id);
+	}
+
 	private void criarMassaTeste() {
 		Produto p1 = new Produto();
 		Produto p2 = new Produto();
@@ -66,4 +86,6 @@ public class PessoaRepository {
 		insert(p3);
 		
 	}
+
+
 }
