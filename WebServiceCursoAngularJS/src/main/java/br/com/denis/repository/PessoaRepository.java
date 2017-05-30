@@ -38,6 +38,12 @@ public class PessoaRepository {
 		this.entityManager.getTransaction().commit();
 	}
 	
+	public void insert(List<Produto> listProdutos) {
+		for (Produto produto : listProdutos) {
+			insert(produto);
+		}
+	}
+	
 	private void criarMassaTeste() {
 		Produto p1 = new Produto();
 		Produto p2 = new Produto();
