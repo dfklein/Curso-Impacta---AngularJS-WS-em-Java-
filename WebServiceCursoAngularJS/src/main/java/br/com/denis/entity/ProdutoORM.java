@@ -15,6 +15,8 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "TB_PRODUTO")
+@Getter
+@Setter
 public class ProdutoORM {
 	
 	@Id
@@ -28,36 +30,5 @@ public class ProdutoORM {
 	
 	private Double preco;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public Date getDataCriacao() {
-		return dataCriacao;
-	}
-
-	public void setDataCriacao(Date dataCriacao) {
-		this.dataCriacao = dataCriacao;
-	}
-
-	public Double getPreco() {
-		return preco;
-	}
-
-	public void setPreco(Double preco) {
-		this.preco = preco;
-	}
 	
 }

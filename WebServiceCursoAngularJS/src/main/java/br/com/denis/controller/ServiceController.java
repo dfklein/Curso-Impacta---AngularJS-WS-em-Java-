@@ -1,6 +1,7 @@
 package br.com.denis.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -13,6 +14,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import br.com.denis.entity.ProdutoORM;
+import br.com.denis.helper.RootElementHelper;
 import br.com.denis.http.Produto;
 import br.com.denis.repository.ProdutoRepository;
 
@@ -24,7 +26,35 @@ import br.com.denis.repository.ProdutoRepository;
 @Path("/service")
 public class ServiceController {
 
-	private final ProdutoRepository rep = new ProdutoRepository();
+//	private final ProdutoRepository rep = new ProdutoRepository();
+	private List<ProdutoORM> listProdutoORM;
+	private List<Produto> listProdutoHttp;
+	
+	public ServiceController() {
+		if (listProdutoORM == null) {
+			listProdutoORM = new ArrayList<>();
+			ProdutoORM p1 = new ProdutoORM();
+			ProdutoORM p2 = new ProdutoORM();
+			ProdutoORM p3 = new ProdutoORM();
+
+			p1.setDescricao("Sabão em pó");
+			p1.setPreco(10.0);
+			p1.setDataCriacao(new Date());
+
+			p2.setDescricao("Macarrão");
+			p2.setPreco(23.41);
+			p2.setDataCriacao(new Date());
+
+			p3.setDescricao("Leite condensado");
+			p3.setPreco(7.99);
+			p3.setDataCriacao(new Date());
+
+			listProdutoORM.add(p1);
+			listProdutoORM.add(p2);
+			listProdutoORM.add(p3);
+			
+		}
+	}
 	
 	/**
 	 * @Consumes - determina o formato dos dados que vamos postar
@@ -45,7 +75,7 @@ public class ServiceController {
 			entity.setDataCriacao(produto.getDataCriacao());
 			entity.setPreco(produto.getPreco());
 			
-			rep.insert(entity);
+//			rep.insert(entity);
 			
 			return "Registro cadastrado com sucesso";
 		} catch (Exception e) {
@@ -70,7 +100,7 @@ public class ServiceController {
 			entity.setDataCriacao(produto.getDataCriacao());
 			entity.setPreco(produto.getPreco());
 			
-			rep.update(entity);
+//			rep.update(entity);
 			
 			return "Registro alterado com sucesso";
 		} catch (Exception e) {
@@ -86,16 +116,17 @@ public class ServiceController {
 	@Produces("application/json; charset=UTF-8")
 	@Path("/todosProdutos")
 	public List<Produto> todosProdutos(){
-		List<Produto> pessoas =  new ArrayList<Produto>();
-		 
-		List<ProdutoORM> listaEntityPessoas = rep.listAll();
- 
-		for (ProdutoORM entity : listaEntityPessoas) {
- 
-			pessoas.add(new Produto(entity.getId(), entity.getDescricao(), entity.getDataCriacao(), entity.getPreco()));
-		}
- 
-		return pessoas;
+//		List<Produto> pessoas =  new ArrayList<Produto>();
+//		 
+//		List<ProdutoORM> listaEntityPessoas = rep.listAll();
+// 
+//		for (ProdutoORM entity : listaEntityPessoas) {
+// 
+//			pessoas.add(new Produto(entity.getId(), entity.getDescricao(), entity.getDataCriacao(), entity.getPreco()));
+//		}
+// 
+//		return pessoas;
+		return RootElementHelper.converterOrmParaHttp(listProdutoORM);
 	}
  
 	/**
@@ -104,14 +135,16 @@ public class ServiceController {
 	@GET
 	@Produces("application/json; charset=UTF-8")
 	@Path("/getProduto/{id}")
-	public Produto findById(@PathParam("id") Long id){
+	public Produto findById(@PathParam("id") Integer id) {
+		
+		return RootElementHelper.converterOrmParaHttp(listProdutoORM.get(id));
  
-		ProdutoORM entity = rep.findById(id);
-		 
-		if(entity != null)
-			return new Produto(entity.getId(), entity.getDescricao(), entity.getDataCriacao(), entity.getPreco());
- 
-		return null;
+//		ProdutoORM entity = rep.findById(id);
+//		 
+//		if(entity != null)
+//			return new Produto(entity.getId(), entity.getDescricao(), entity.getDataCriacao(), entity.getPreco());
+// 
+//		return null;
 	}
  
 	/**
@@ -120,11 +153,12 @@ public class ServiceController {
 	@DELETE
 	@Produces("application/json; charset=UTF-8")
 	@Path("/excluir/{codigo}")	
-	public String excluir(@PathParam("codigo") Long codigo){
+	public String excluir(@PathParam("codigo") Integer codigo){
  
 		try {
+			listProdutoORM.remove(codigo);
  
-			rep.remove(codigo);
+//			rep.remove(codigo);
  
 			return "Registro excluido com sucesso!";
  
