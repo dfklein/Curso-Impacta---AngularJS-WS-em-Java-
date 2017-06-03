@@ -1,19 +1,15 @@
 package br.com.denis.repository;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.swing.JOptionPane;
 
 import br.com.denis.entity.ProdutoORM;
 
-public class ProdutoRepository {
+public class ProdutoRepository extends BaseRepository {
 
 	private final EntityManagerFactory entityManagerFactory;
 
@@ -21,22 +17,12 @@ public class ProdutoRepository {
 
 	public ProdutoRepository() {
 
-		this.entityManagerFactory = Persistence.createEntityManagerFactory("h2");
+		this.entityManagerFactory = Persistence.createEntityManagerFactory("persistence_unit_db_estudo");
 		this.entityManager = this.entityManagerFactory.createEntityManager();
 
-		criarMassaTeste();
+//		criarMassaTeste();
 	}
 
-	public static Connection getConnection() throws SQLException {
-		try {
-			Class.forName("org.h2.Driver"); // driver para h2 db
-			return DriverManager.getConnection("jdbc:h2:tcp://localhost:9001/db/meudb", "sa", "123"); // retorna
-																										// db
-		} catch (ClassNotFoundException e) {
-			JOptionPane.showMessageDialog(null, e.getMessage());
-			throw new SQLException();
-		}
-	}
 
 	@SuppressWarnings("unchecked")
 	public List<ProdutoORM> listAll() {
