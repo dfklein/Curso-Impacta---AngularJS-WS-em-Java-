@@ -16,8 +16,8 @@ public class ProdutoRepository extends BaseRepository {
 	private final EntityManager entityManager;
 
 	public ProdutoRepository() {
-
-		this.entityManagerFactory = Persistence.createEntityManagerFactory("persistence_unit_db_estudo");
+		
+		this.entityManagerFactory = Persistence.createEntityManagerFactory("db_curso_angular_js");
 		this.entityManager = this.entityManagerFactory.createEntityManager();
 
 //		criarMassaTeste();
@@ -26,7 +26,7 @@ public class ProdutoRepository extends BaseRepository {
 
 	@SuppressWarnings("unchecked")
 	public List<ProdutoORM> listAll() {
-		return this.entityManager.createQuery("SELECT p FROM Produto p ORDER BY p.id").getResultList();
+		return this.entityManager.createQuery("SELECT p FROM ProdutoORM p ORDER BY p.id").getResultList();
 	}
 
 	/**

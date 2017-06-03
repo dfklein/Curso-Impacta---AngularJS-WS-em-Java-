@@ -26,34 +26,34 @@ import br.com.denis.repository.ProdutoRepository;
 @Path("/service")
 public class ServiceController {
 
-//	private final ProdutoRepository rep = new ProdutoRepository();
-	private List<ProdutoORM> listProdutoORM;
-	private List<Produto> listProdutoHttp;
+	private final ProdutoRepository rep = new ProdutoRepository();
+//	private List<ProdutoORM> listProdutoORM;
+//	private List<Produto> listProdutoHttp;
 	
 	public ServiceController() {
-		if (listProdutoORM == null) {
-			listProdutoORM = new ArrayList<>();
-			ProdutoORM p1 = new ProdutoORM();
-			ProdutoORM p2 = new ProdutoORM();
-			ProdutoORM p3 = new ProdutoORM();
-
-			p1.setDescricao("Sabão em pó");
-			p1.setPreco(10.0);
-			p1.setDataCriacao(new Date());
-
-			p2.setDescricao("Macarrão");
-			p2.setPreco(23.41);
-			p2.setDataCriacao(new Date());
-
-			p3.setDescricao("Leite condensado");
-			p3.setPreco(7.99);
-			p3.setDataCriacao(new Date());
-
-			listProdutoORM.add(p1);
-			listProdutoORM.add(p2);
-			listProdutoORM.add(p3);
-			
-		}
+//		if (listProdutoORM == null) {
+//			listProdutoORM = new ArrayList<>();
+//			ProdutoORM p1 = new ProdutoORM();
+//			ProdutoORM p2 = new ProdutoORM();
+//			ProdutoORM p3 = new ProdutoORM();
+//
+//			p1.setDescricao("Sabão em pó");
+//			p1.setPreco(10.0);
+//			p1.setDataCriacao(new Date());
+//
+//			p2.setDescricao("Macarrão");
+//			p2.setPreco(23.41);
+//			p2.setDataCriacao(new Date());
+//
+//			p3.setDescricao("Leite condensado");
+//			p3.setPreco(7.99);
+//			p3.setDataCriacao(new Date());
+//
+//			listProdutoORM.add(p1);
+//			listProdutoORM.add(p2);
+//			listProdutoORM.add(p3);
+//			
+//		}
 	}
 	
 	/**
@@ -116,17 +116,17 @@ public class ServiceController {
 	@Produces("application/json; charset=UTF-8")
 	@Path("/todosProdutos")
 	public List<Produto> todosProdutos(){
-//		List<Produto> pessoas =  new ArrayList<Produto>();
-//		 
-//		List<ProdutoORM> listaEntityPessoas = rep.listAll();
-// 
-//		for (ProdutoORM entity : listaEntityPessoas) {
-// 
-//			pessoas.add(new Produto(entity.getId(), entity.getDescricao(), entity.getDataCriacao(), entity.getPreco()));
-//		}
-// 
-//		return pessoas;
-		return RootElementHelper.converterOrmParaHttp(listProdutoORM);
+		List<Produto> pessoas =  new ArrayList<Produto>();
+		 
+		List<ProdutoORM> listaEntityPessoas = rep.listAll();
+ 
+		for (ProdutoORM entity : listaEntityPessoas) {
+ 
+			pessoas.add(new Produto(entity.getId(), entity.getDescricao(), entity.getDataCriacao(), entity.getPreco()));
+		}
+ 
+		return pessoas;
+//		return RootElementHelper.converterOrmParaHttp(listProdutoORM);
 	}
  
 	/**
@@ -135,16 +135,16 @@ public class ServiceController {
 	@GET
 	@Produces("application/json; charset=UTF-8")
 	@Path("/getProduto/{id}")
-	public Produto findById(@PathParam("id") Integer id) {
+	public Produto findById(@PathParam("id") Long id) {
 		
-		return RootElementHelper.converterOrmParaHttp(listProdutoORM.get(id));
+//		return RootElementHelper.converterOrmParaHttp(listProdutoORM.get(id));
  
-//		ProdutoORM entity = rep.findById(id);
-//		 
-//		if(entity != null)
-//			return new Produto(entity.getId(), entity.getDescricao(), entity.getDataCriacao(), entity.getPreco());
-// 
-//		return null;
+		ProdutoORM entity = rep.findById(id);
+		 
+		if(entity != null)
+			return new Produto(entity.getId(), entity.getDescricao(), entity.getDataCriacao(), entity.getPreco());
+ 
+		return null;
 	}
  
 	/**
@@ -153,12 +153,12 @@ public class ServiceController {
 	@DELETE
 	@Produces("application/json; charset=UTF-8")
 	@Path("/excluir/{codigo}")	
-	public String excluir(@PathParam("codigo") Integer codigo){
+	public String excluir(@PathParam("codigo") Long codigo){
  
 		try {
-			listProdutoORM.remove(codigo);
+//			listProdutoORM.remove(codigo);
  
-//			rep.remove(codigo);
+			rep.remove(codigo);
  
 			return "Registro excluido com sucesso!";
  
