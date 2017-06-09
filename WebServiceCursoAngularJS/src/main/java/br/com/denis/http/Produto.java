@@ -22,6 +22,6 @@ public class Produto {
 
 	private Date dataCriacao;
 	
-	private Double preco;
+	private String preco;
 
 }

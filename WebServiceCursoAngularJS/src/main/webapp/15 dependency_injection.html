@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html ng-app="appAngular">
+
+<head>
+    <title>Serviços</title>
+    <link href="../css/estilos.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+</head>
+
+<body ng-controller="Principal">
+    <h2>Usando service e factory com injeção de dependência</h2>
+
+    <div  >
+        <p>Fornecer um número:  <input type="number" ng-model="valor" /></p>
+        <button ng-click="calcularQuadrado()">X<sup>2</sup></button>
+        <p>Resultado: {{resultado}}</p>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+
+    <script type="text/javascript">
+         var appAngular = angular.module("appAngular", []);
+
+         appAngular.config(function($provide) {
+            $provide.provider('MathFactory', function() {
+               this.$get = function() {
+                  var factory = {};
+
+                  factory.multiplicar = function(a, b) {
+                     return a * b;
+                  }
+                  return factory;
+               };
+            });
+         });
+
+         appAngular.value("defaultInput", 5);
+
+         appAngular.factory('MathFactory', function() {
+            var factory = {};
+
+            factory.multiplicar = function(a, b) {
+               return a * b;
+            }
+            return factory;
+         });
+
+         appAngular.service('MathService', function(MathFactory){
+            this.calcularQuadrado = function(a) {
+               return MathFactory.multiplicar(a,a);
+            }
+         });
+         
+         appAngular.value('defaultInput', 5); // com isto aqui você pode injetar no seu controller uma variável, além dos serviços.
+
+         appAngular.controller('Principal', function($scope, MathService, defaultInput) { // observe o defaultInput sendo injetado nos parâmetros do controller.
+        	 // neste exemplo, declarar o defaultInput dentro deste método dá na mesma.
+            $scope.valor = defaultInput;
+            $scope.resultado = MathService.calcularQuadrado($scope.valor);
+
+            $scope.calcularQuadrado = function() {
+               $scope.resultado = MathService.calcularQuadrado($scope.valor);
+            }
+         });
+
+    </script>
+
+</body>
+</html>

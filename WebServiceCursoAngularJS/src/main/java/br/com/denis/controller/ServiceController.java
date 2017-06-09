@@ -71,11 +71,15 @@ public class ServiceController {
 		try {
 			ProdutoORM entity = new ProdutoORM();
 			
+			System.out.println(produto.getDescricao());
+			System.out.println(produto.getPreco());
+			System.out.println(produto.getDataCriacao());
+			
 			entity.setDescricao(produto.getDescricao());
 			entity.setDataCriacao(produto.getDataCriacao());
 			entity.setPreco(produto.getPreco());
 			
-//			rep.insert(entity);
+			rep.insert(entity);
 			
 			return "Registro cadastrado com sucesso";
 		} catch (Exception e) {
@@ -100,7 +104,7 @@ public class ServiceController {
 			entity.setDataCriacao(produto.getDataCriacao());
 			entity.setPreco(produto.getPreco());
 			
-//			rep.update(entity);
+			rep.update(entity);
 			
 			return "Registro alterado com sucesso";
 		} catch (Exception e) {

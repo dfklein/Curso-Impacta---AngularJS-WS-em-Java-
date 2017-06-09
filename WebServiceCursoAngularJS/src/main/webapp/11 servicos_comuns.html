@@ -1,0 +1,46 @@
+﻿<html ng-app="appAngular">
+<head>
+    <title>Serviços</title>
+<!--     <link href="../css/estilos.css" rel="stylesheet" /> -->
+    <meta charset="utf-8" />
+</head>
+<!-- Serviços $location, $window -->
+<body ng-controller="Principal as ctl">
+
+    <!-- conteúdo da view -->
+    <h2>Exemplo de Serviços prontos</h2>
+    <button ng-click="ctl.mostrarLog()">Mostrar Log</button>
+
+    <!-- definição da api e do controller -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script type="text/javascript">
+    	// O CONCEITO DE DE SERVIÇO É MUITO SIMILAR AO DE UM HELPER NO JAVA. ELE ENTENDE QUE VOCÊ
+    	// ESTÁ SEMPRE REALIZANDO TAREFAS IGUAIS A PARTIR DE VALORES DIFERENTES DE UM MESMO PARÂMETRO.
+    
+        //a ordem da injeção de dependência é importante
+		angular.module('appAngular', [])
+			.controller('Principal', ['$location','$window' ,function($location, $window) {
+	        
+				var self = this;
+				
+		        self.mostrarLog = function() {
+					var url = $location.url;
+					var absUrl = $location.absUrl();
+					var protocol = $location.protocol();
+					
+					var mensagem = 'URL: ' + url + '\nAbsUrl: ' + absUrl + '\nProtocolo: ' + protocol;
+					
+					$window.alert(mensagem);
+		        }
+			}])
+        
+        
+        
+        
+        	
+        
+
+
+    </script>
+</body>
+</html>

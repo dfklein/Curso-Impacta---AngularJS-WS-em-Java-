@@ -65,27 +65,4 @@ public class ProdutoRepository extends BaseRepository {
 		return this.entityManager.find(ProdutoORM.class, id);
 	}
 
-	private void criarMassaTeste() {
-		ProdutoORM p1 = new ProdutoORM();
-		ProdutoORM p2 = new ProdutoORM();
-		ProdutoORM p3 = new ProdutoORM();
-
-		p1.setDescricao("Sabão em pó");
-		p1.setPreco(10.0);
-		p1.setDataCriacao(new Date());
-
-		p2.setDescricao("Macarrão");
-		p2.setPreco(23.41);
-		p2.setDataCriacao(new Date());
-
-		p3.setDescricao("Leite condensado");
-		p3.setPreco(7.99);
-		p3.setDataCriacao(new Date());
-
-		insert(p1);
-		insert(p2);
-		insert(p3);
-
-	}
-
 }

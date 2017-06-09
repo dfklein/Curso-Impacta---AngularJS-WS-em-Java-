@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html ng-app="primeiroController">
+<head>
+    <title>Introdução ao AngularJS</title>
+<!--     <link href="../css/estilos.css" rel="stylesheet" /> -->
+    <meta charset="utf-8" />
+</head>
+<body ng-controller="Principal as ctl"><!-- Isto significa que você vai se referir ao controler "Principal" com a tag ctl  -->
+
+	<h2>Lista de alunos</h2>
+	<div ng-repeat="nome in ctl.nomes">
+		{{nome}}
+	</div>
+	
+	<h2>Lista de alunos 2</h2>
+	
+	<div ng-repeat="pessoasIdade in ctl.pessoasIdade">
+		Nome: {{pessoasIdade.nome}}, Idade: {{pessoasIdade.idade}}
+	</div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script type="text/javascript">
+    	angular.module('primeiroController', [])
+    		.controller('Principal', [function() {
+				var self = this;
+				
+				self.nomes=['Fulano da Silva',
+					'Beltrano Pereira',
+					'Ciclana Rodrigues'];
+				
+				self.pessoasIdade=[ // aqui você declara um objeto em formato JSON. Ele deve estar entre {}
+						{nome: 'Fulano da Silva', idade: '34'},
+						{nome: 'Beltrano Pereira', idade: '54'},
+						{nome: 'Ciclana Rodrigues', idade: '28'}
+					];
+				
+
+    		}]);
+    </script>
+</body>
+</html>

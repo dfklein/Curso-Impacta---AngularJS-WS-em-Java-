@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html ng-app="appAngular">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<head>
+    <title>Validações de Formulários</title>
+    <link href="../css/estilos.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+    <style>
+		.nome.ng-valid {
+			color: green;
+		}
+		
+ 		.nome.ng-dirty.ng-invalid-required { /* você precisa usar o dirty porque se não ele fará a validação no carregamento da página. O dirty significa que houve interação com o formulário */
+			background-color: red; 
+		}
+		
+		.nome.ng-dirty.ng-invalid-minlegth {
+			color: orange;
+		}
+		
+		
+    </style>
+</head>
+<body ng-controller="Principal as ctl">
+
+    <!-- conteúdo da view -->
+	<form ng-submit="ctl.submit()" name="alunosForm">
+		Nome:
+		<input type="text" class="nome" name="anome" ng-model="ctl.aluno.nome" required ng-minlength="5">
+			
+		<span ng-show="alunosFrom.anome.$error.required">Campo obrigatório</span><br />
+		<h1 ng-if="!alunosForm.anome.$valid">The value is too long</h1>
+		
+		<br>
+		Curso: 
+		<input type="text" ng-model="ctl.aluno.curso"><br />
+		<input type="submit" value="Enviar">	
+	</form>
+	
+
+    <!-- definição da api e do controller -->
+    
+    <script type="text/javascript">
+        angular.module('appAngular', [])
+            .controller('Principal', [function () {
+
+                var self = this;
+
+                self.submit = function () {
+                    //O objeto aluno é criado implicitamente no form
+                    alert('Dados do segundo formulário: \n' + self.aluno.nome + '\n' + self.aluno.curso);
+                };
+
+            }]);
+    </script>
+</body>
+</html>

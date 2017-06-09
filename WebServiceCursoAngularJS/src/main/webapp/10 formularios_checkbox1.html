@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html ng-app="appAngular">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+<head>
+    <title>Controles de Formulários</title>
+<!--     <link href="../css/estilos.css" rel="stylesheet" /> -->
+    <meta charset="utf-8" />
+</head>
+<body ng-controller="Principal as ctl">
+
+    <!-- conteúdo da view -->
+    <h2>Quais cursos deseja realizar?</h2>
+    <form name="formCursos">
+		<div ng-repeat="curso in ctl.cursos">
+			<label>{{curso.descricao}}</label>
+			<input type="checkbox" ng-model="curso.selecionado" ng-false-value="'NAO'" ng-true-value="'SIM'">
+			{{curso.selecionado}}
+		</div>
+    </form>
+
+    <!-- definição da api e do controller -->
+    
+    <script type="text/javascript">
+        angular.module('appAngular', [])
+            .controller('Principal', [function () {
+
+                var self = this;
+
+                self.cursos = [
+                    { descricao: 'JAVA',selecionado: 'SIM' },
+                    { descricao: 'PHP', selecionado: 'NAO' },
+                    { descricao: '.NET', selecionado: 'NAO' }
+                ];
+            }]);
+    </script>
+</body>
+</html>

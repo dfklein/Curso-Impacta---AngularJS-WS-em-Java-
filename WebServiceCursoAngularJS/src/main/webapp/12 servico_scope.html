@@ -1,0 +1,53 @@
+﻿<html ng-app="appAngular">
+<head>
+    <title>Serviços</title>
+    <link href="../css/estilos.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+</head>
+<!-- Serviços $location, $window -->
+<body>
+
+    <!-- conteúdo da view -->
+    <h2>Verificação do escopo</h2>
+    <div ng-controller="Primeiro">
+    	{{mensagem}}<br />
+    	{{tipo}}<br />
+    </div>
+    <div ng-controller="Segundo">
+    	{{mensagem}}<br />
+    	{{tipo}}<br />
+    </div>
+    <div ng-controller="Terceiro">
+    	{{mensagem}}<br />
+    	{{tipo}}<br />
+    </div>
+
+
+    <!-- definição da api e do controller -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script type="text/javascript">
+        //Observe a não utilização das chaves e o aninhamento de controllers
+        
+        angular.module('appAngular', [])
+            .controller('Primeiro', function ($scope) {
+            	$scope.mensagem = 'Msg 1o escopo';
+            	$scope.tipo = 'Tipo 1'
+            	
+            	
+            })
+            
+            .controller('Segundo', function ($scope) {
+            	$scope.mensagem = 'Msg 2o escopo';
+            	
+            })
+            
+            .controller('Terceiro', function ($scope) {
+            	$scope.mensagem = 'Msg 3o escopo';
+            	$scope.tipo = 'Tipo 3'
+            	
+            })
+        
+
+    </script>
+</body>
+</html>

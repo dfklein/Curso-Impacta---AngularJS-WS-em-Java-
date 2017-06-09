@@ -28,7 +28,7 @@ public class ProdutoORM {
 	@Temporal(TemporalType.DATE)
 	private Date dataCriacao;
 	
-	private Double preco;
+	private String preco;
 
 	
 }

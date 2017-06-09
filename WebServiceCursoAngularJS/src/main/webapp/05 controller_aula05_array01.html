@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html ng-app="appAngular">
+<head>
+	<title>Controller: arrays</title>
+	<link href="..css/estilos.css" rel="stylesheet" />
+	<meta charset="utf-8" />
+</head>
+
+	<body ng-controller="Principal as ctl">
+	
+		<!-- conteúdo da view -->
+		<div ng-repeat="aluno in ctl.alunos" ng-class="ctl.verificarStatus(aluno.status)">
+			Nome: {{aluno.nome}} <br />
+			Curso: {{aluno.curso}} <br /> 
+			Status:	{{aluno.status}} <br /> 
+		<span>----------------------------</span>
+		<br /><br />
+		</div>
+	
+	
+		<!-- definição da api e do controller -->
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+		<script type="text/javascript">
+	        angular.module('appAngular', [])
+	            .controller('Principal', [function () {
+	
+	                var self = this;
+	
+	                self.alunos = [
+	                    { nome: 'Ademar Torres', curso: 'NodeJS', status: 'Aprovado' },
+	                    { nome: 'Cecilia Maria', curso: 'Psicologia' },
+	                    { nome: 'Marcelo Lima', curso: 'Turismo', status: 'Reprovado' }
+	                ];
+				
+	                self.verificarStatus = function(status) {
+	                	return {
+	                		finalizado: status != null,
+	                		pendente: status == null
+	                	
+	                	}
+	                	
+	                }
+	
+	            }]);
+	    </script>
+	</body>
+</html>

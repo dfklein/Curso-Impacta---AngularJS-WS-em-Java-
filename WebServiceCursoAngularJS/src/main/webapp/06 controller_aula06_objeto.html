@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html ng-app="appAngular">
+<head>
+    <title>Controller: arrays</title>
+    <meta charset="utf-8" />
+
+</head>
+<body ng-controller="Principal as ctl">
+
+    <!-- conteúdo da view -->
+	<div ng-repeat="(atrib, dados) in ctl.empresa"> <!-- você passa dois atributos como alias, o segundo referencia um objeto interno. -->
+		<strong>{{atrib}}</strong><br />
+		
+		CNPJ: {{dados.CNPJ}}<br />
+		Descrição: {{dados.Descricao}}<br />
+		Endereço:<br />
+		Logradouro {{dados.Endereco.Logradouro}}<br />
+		Numero {{dados.Endereco.Numero}}<br />
+		Cidade {{dados.Endereco.Cidade}}<br />
+	</div>
+
+
+    <!-- definição da api e do controller -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script type="text/javascript">
+        angular.module('appAngular', [])
+            .controller('Principal', [function () {
+
+                var self = this;
+
+				self.empresa = {
+						Atributos: {
+							CNPJ: '00.000.000/0001-00',
+							Descricao: 'Empresa XYZ ltda',
+							Endereco: {
+								Logradouro: 'Av Paulista',
+								Numero: '1009',
+								Cidade: 'São Paulo'
+							}
+						}
+				}
+            }]);
+    </script>
+</body>
+</html>

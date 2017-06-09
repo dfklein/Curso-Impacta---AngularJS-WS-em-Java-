@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html ng-app="appAngular">
+<head>
+    <title>Formulários</title>
+    <meta charset="utf-8" />
+
+</head>
+<body ng-controller="Principal as ctl">
+
+    <!-- conteúdo da view -->
+
+	<h2>Formulário 1:</h2>
+	<form ng-submit="ctl.submit1()">
+		<input type="text" ng-model="ctl.nome" placeholder="Digite o nome"/>
+		<input type="text" ng-model="ctl.curso" placeholder="Digite o curso"/>
+		<input type="submit" value="Submit 1">
+	</form>
+	
+	<h2>Formulário 2:</h2>
+	<form ng-submit="ctl.submit2()">
+		<input type="text" ng-model="ctl.aluno.nome" placeholder="Digite o nome"/> <!-- A declaração do objeto aluno é feita, de certa forma, por aqui. Melhor para o uso em WS -->
+		<input type="text" ng-model="ctl.aluno.curso" placeholder="Digite o curso"/>
+		<input type="submit" value="Submit 2">
+	</form>
+	
+
+    <!-- definição da api e do controller -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script type="text/javascript">
+        angular.module('appAngular', [])
+            .controller('Principal', [function () {
+
+                var self = this;
+				// modo explícito:
+				self.submit1 = function() {
+					var aluno = { nome: self.nome, curso: self.curso }; // aqui você está declarando duas variáveis individuais como parte do controller e depois declarando um objeto que as possui.
+					alert('Dados do primeiro formulário: \n' + aluno.nome + '\n' + aluno.curso)
+				};
+				
+				// modo implícito (o objeto está declarado, de certa forma, no próprio html)
+				self.submit2 = function() {
+					alert('Dados do primeiro formulário: \n' + self.aluno.nome + '\n' + self.aluno.curso)
+					
+				}
+				
+
+				
+
+            }]);
+    </script>
+</body>
+</html>

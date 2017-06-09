@@ -1,3 +1,0 @@
-Feito a partir do tutorial em:
-
-http://www.ciceroednilson.com.br/java-criando-um-web-service-rest-com-jersey-e-jpa/

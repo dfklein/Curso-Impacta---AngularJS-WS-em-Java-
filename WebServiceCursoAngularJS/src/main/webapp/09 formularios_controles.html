@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html ng-app="appAngular">
+<head>
+    <title>Controles de Formulários</title>
+    <link href="../css/estilos.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+
+</head>
+<body ng-controller="Principal as ctl">
+
+    <!-- conteúdo da view -->
+    <h2>Controle de Alunos</h2>
+    <form ng-submit="ctl.submit()">
+        Nome:<br />
+        <input type="text" ng-model="ctl.nome" /><br />
+        Curso:<br />
+        <select ng-model="ctl.curso" ng-options="c.descricao for c in ctl.cursos"></select>
+        <br />
+        Período:<br />
+
+        <label>
+            <input type="radio" name="periodo" ng-model="ctl.periodo" value="manhã" />Manhã
+        </label>
+        <label>
+            <input type="radio" name="periodo" ng-model="ctl.periodo" value="noite" />Noite
+        </label>
+
+
+        <br />
+
+        <input type="submit" value="Enviar" />
+    </form>
+
+
+
+    <!-- definição da api e do controller -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script type="text/javascript">
+        angular.module('appAngular', [])
+            .controller('Principal', [function () {
+
+                var self = this;
+                self.cursos = [
+                	{ id:1, descricao:'Java' },
+                	{ id:2, descricao:'Angular'},
+                	{ id:3, descricao:'Corte e costura'}
+                               
+                ]
+                
+                self.submit = function() {
+                	alert('DADOS DO ALUNO: \nnome: ' 
+                			+ self.nome 
+                			+ '\ncurso: ' + self.curso.descricao 
+                			+ '\nperíodo: ' + self.periodo);
+                }
+                
+
+            }]);
+    </script>
+</body>
+</html>
+

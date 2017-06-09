@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html ng-app="appAngular">
+<head>
+    <title>Serviços</title>   
+    <link href="../css/estilos.css" rel="stylesheet" />
+    <meta charset="utf-8" /> 
+</head>
+
+<body ng-controller="Principal">
+    <h2>Usando service e factory</h2>
+
+    <div  >
+        <p>Fornecer um número: <input type="number" ng-model="valor" /></p>
+        <button ng-click="calcularQuadrado()">X<sup>2</sup></button>
+        <p>Resultado: {{resultado}}</p>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script type="text/javascript">
+         var appAngular = angular.module("appAngular", []);
+
+         appAngular.factory('MathFactory', function() {
+        	var factory = {};
+        	
+        	factory.multiplicar = function (a, b) {
+        		return a * b;
+        	}
+        	
+        	return factory;
+         });
+         
+         appAngular.service('MathService', function(MathFactory) {
+         	this.calcularQuadrado = function(a) {
+         		return MathFactory.multiplicar(a, a); // é o mesmo parâmetro porque você tá calculando o quadrado
+         	}
+         });
+         
+         appAngular.controller('Principal', function ($scope, MathService) {
+        	$scope.calcularQuadrado = function () {
+        		$scope.resultado = MathService.calcularQuadrado($scope.valor);
+        	} 
+         });
+
+    </script>
+
+</body>
+</html>
