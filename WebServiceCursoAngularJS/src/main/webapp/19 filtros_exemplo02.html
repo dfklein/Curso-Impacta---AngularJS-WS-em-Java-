@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Filtros</title>
+    <link href="../css/estilos.css" rel="stylesheet" />
+</head>
+
+<body ng-app="appAngular">
+    <h2>Mais Exemplo de Filtros</h2>
+    <div ng-controller="Principal as ctl">
+        <button ng-click="ctl.currentFilter = 'string'">
+            Executar Filtro com String
+        </button>
+        
+        <button ng-click="ctl.currentFilter = 'object'">
+            Executar Filtro com Object
+        </button>
+
+        <button ng-click="ctl.currentFilter = 'function'">
+            Executar Filtro com function
+        </button>
+        <br/>
+        Texto para o Filtro (string): 
+        <input type="text" ng-model="ctl.filterOptions['string']" />
+        <br />
+        <br />
+        <ul>
+            <li ng-repeat="aluno in ctl.alunos | 
+                      filter:ctl.filterOptions[ctl.currentFilter] | 
+                      orderBy:ctl.sortOrder | 
+                      limitTo:5">
+                {{aluno.nome}} - {{aluno.idade}} - {{aluno.curso}}
+            </li>
+        </ul>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+
+    <script type="text/javascript">
+        angular.module('appAngular', [])
+          .controller('Principal', [function () {
+
+              this.alunos = [
+                  { nome: 'Jefferson Barros', idade: 25, curso: 'Psicologia' },
+                  { nome: 'Ana Carolina', idade: 32, curso: 'Turismo' },
+                  { nome: 'Matheus Santos', idade: 18, curso: 'Engenharia' },
+                  { nome: 'Marcos Rogerio', idade: 25, curso: 'Direito' },
+              ];
+
+              this.sortOrder = ['+nome', '-curso'];
+
+              this.filterOptions = {
+                  "string": '',
+                  "object": { idade: 25},
+                  "function": function (aluno) {
+                      return aluno.idade < 20;
+                  }
+              };
+
+              this.currentFilter = 'string';
+          }]);
+    </script>
+</body>
+</html>
+

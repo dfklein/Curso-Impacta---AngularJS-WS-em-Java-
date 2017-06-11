@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Filtros</title>
+    <link href="../css/estilos.css" rel="stylesheet" />
+</head>
+
+<body ng-app="appAngular">
+    <h2>Filtro customizado</h2>
+    <div ng-controller="Principal as ctl">
+        
+        <p>
+            Hora inicial (timestamp): {{ctl.horaInicial}}
+        </p>
+        <p>
+            Hora inicial (DateTime): {{ctl.horaInicial | date:'medium'}}
+        </p>
+        <p>
+            Hora inicial (Usando nosso filtro): {{ctl.horaInicial | horasAtras}}
+        </p>
+        <p>
+            algumTempoAtras: {{ctl.algumTempoAtras | date:'short'}}
+        </p>
+        <p>
+            algumTempoAtras: {{ctl.algumTempoAtras | horasAtras}}
+        </p>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+
+    <script type="text/javascript">
+        angular.module('appAngular', [])
+          .controller('Principal', [function () {
+              this.horaInicial = new Date().getTime();
+              this.algumTempoAtras = new Date().getTime() - (1000 * 60 * 60 * 4);
+          }])
+            .filter('horasAtras', [function () {
+                var ONE_MINUTE = 1000 * 60;
+                var ONE_HOUR = ONE_MINUTE * 60;
+                var ONE_DAY = ONE_HOUR * 24;
+                var ONE_MONTH = ONE_DAY * 30;
+
+                return function (ts) {
+                    var currentTime = new Date().getTime();
+                    var diff = currentTime - ts;
+                    if (diff < ONE_MINUTE) {
+                        return 'segundos atrás';
+                    } else if (diff < ONE_HOUR) {
+                        return 'minutos atras';
+                    } else if (diff < ONE_DAY) {
+                        return 'horas atrás';
+                    } else if (diff < ONE_MONTH) {
+                        return 'dias atras';
+                    } else {
+                        return 'meses atras';
+                    }
+                };
+            }]);
+    </script>
+</body>
+</html>

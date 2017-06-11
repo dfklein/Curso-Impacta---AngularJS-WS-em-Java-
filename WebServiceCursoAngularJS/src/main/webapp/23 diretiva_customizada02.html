@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Diretiva customizada</title>
+    <link href="../css/estilos.css" rel="stylesheet" />
+</head>
+
+<body ng-app="appAngular">
+    <h2>Uso da diretiva customizada</h2>
+    <div ng-controller="Principal as ctl">
+        <h3>Lista de Produtos</h3>
+        <div ng-repeat="produto in ctl.produtos">
+        	<div ngp-produto></div> <!-- Utilizado enquanto atributo -->
+        	<ngp-produto></ngp-produto><!-- Utilizado enquanto elemento -->
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+
+    <script type="text/javascript">
+		angular.module('appAngular, []')
+			.directive('ngpProduto', [function() { // observe a convenção: aqui você declara a diretiva com um prefixo e letra maiúscula no sufixo. Na linha 12 você vê que o sufixo é referenciado com letra minúscula e com um hífem separando-o do prefixo. 
+				return {
+					templateUrl: 'produtos.html',
+					restrict:'AE' // declarado como atributo e como elemento
+				}
+			}])
+			.controller('Principal', [function() {
+				var.self = this;
+				
+				self.produtos = [
+	                  { descricao: 'Celular Samsung', preco: 1200, quantidade: 50 },
+	                  { descricao: 'Cadeira reclinável', preco: 550, quantidade: 10 },
+	                  { descricao: 'Tenis Nike', preco: 599, quantidade: 100 }
+	              ];
+			}])
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Filtros</title>
+<!--     <link href="../css/estilos.css" rel="stylesheet" /> -->
+</head>
+
+<body ng-app="appAngular">
+    <h2>Exemplo de Filtros Comuns</h2>
+    
+    <div ng-controller="Principal as ctl">
+    	<p>
+    		Idade como número: {{ctl.idade | number}}
+    	</p>
+    	<p>
+    		Salário: {{ctl.salario | currency}}
+    	</p>
+    	<p>
+    		Salário em R$: {{ctl.salario | currency:'R$ '}}
+    	</p>
+    	<p>
+    		Nome em maiúsculo: {{ctl.funcionario | uppercase}}
+    	</p>
+    	<p>
+    		Nome em minúsculo: {{ctl.funcionario | lowercase}}
+    	</p>
+    	<p>
+    		Data de admissão: {{ctl.admissao | date:'medium'}}
+    	</p>
+    	<p>
+    		Data de admissão: {{ctl.admissao | date:'dd/MM/yyyy'}}
+    	</p>
+    	<p>
+    		Endereço: {{ctl.endereco | json}}
+    	</p>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+
+    <script type="text/javascript">
+        angular.module('appAngular', [])
+          .controller('Principal', [function () {
+              this.funcionario = 'Jose Carlos Silva';
+              this.admissao = new Date().getTime();
+              this.idade = 35;
+              this.salario = 4500;
+
+              this.endereco = {logradouro: 'Av. Paulista', numero: 1009, cidade: 'São Paulo'};
+          }]);
+    </script>
+</body>
+</html>

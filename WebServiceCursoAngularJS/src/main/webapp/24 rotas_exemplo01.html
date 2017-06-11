@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Diretiva customizada</title>
+    <link href="../css/estilos.css" rel="stylesheet" />
+</head>
+
+<body ng-app="appAngular">
+    <h2>Rotas em Single Page App</h2>
+    <div>
+        <ul>
+            <li><a href="#/">Rota padrão (inicial)</a></li>
+            <li><a href="#/segunda">Segunda rota</a></li>
+            <li><a href="#/terceira">Terceira rota</a></li>
+            <li><a href="#/desconhecida">Rota inexistente</a></li>
+        </ul>
+
+        <div class="borda" ng-view></div>
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.min.js"></script>
+    <script type="text/javascript">
+    	angular.module('appAngular', ['ngRoute'])
+    		// Aqui você define rotas. Rotas não são URLs, apesar de serem expressas como 
+    		// tal. Você faz uma requisição com "/#/" (o que indica que não 
+    		// haverá chamada ao servidor) e o Angular procurará o complemento indicado para 
+    		// saber o que ele deve executar/renderizar. 
+    		.config(['$routeProvider', function($routeProvider) {
+    			$routeProvider
+    				.when('/', {
+    					template: '<h2>Pagina inicial</h2>'
+    				})
+    				.when('/segunda', {
+    					template: '<h2>Segunda inicial</h2>'
+    				})
+    				.when('/terceira', {
+    					template: '<h2>Terceira inicial</h2>'
+    				})
+    				// otherwise seria o que fazer quando nenhum dos casos for o que é
+    				// chamado na requisição (é um tipo de else)
+    				.otherwise({redirectTo: '/'});
+    		}])		
+		
+    </script>
+</body>
+</html>

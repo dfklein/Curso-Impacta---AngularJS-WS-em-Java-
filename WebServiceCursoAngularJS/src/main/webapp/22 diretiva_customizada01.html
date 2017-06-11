@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Diretiva customizada: elemento HTML</title>
+    <link href="../css/estilos.css" rel="stylesheet" />
+</head>
+
+<body ng-app="appAngular">
+    <h2>Uso de diretiva customizada</h2>
+    <div ng-controller="Principal as ctl">
+
+        <aluno name="Francisco"></aluno><br />
+        <aluno name="Frederico"></aluno>
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+
+    <script type="text/javascript">
+        angular.module("appAngular", [])
+
+        .directive('aluno', function () {
+            var diretiva = {};
+            diretiva.restrict = 'E'; // o E representa "elemento"
+
+            diretiva.scope = {
+                aluno: "=name"
+            }
+
+            diretiva.compile = function (element, attributes) {
+                element.css("border", "1px solid #cccccc");
+
+                var linkFunction = function ($scope, element, attributes) {
+                    element.html("Aluno: <b>" + $scope.aluno.name + "</b> , Curso: <b>" + $scope.aluno.curso + "</b><br/>");
+                    element.css("background-color", "#e1e1e1");
+                }
+                return linkFunction;
+            }
+            return diretiva;
+        })
+        
+        .controller('Principal', function ($scope) {
+        	$scope.Francisco = {};
+        	$scope.Francisco.name = "Francisco Parashar";
+        	$scope.Francisco.curso = "Informática básica";
+        	
+        	$scope.Frederico = {};
+        	$scope.Frederico.name = "Frederico Parashar";
+        	$scope.Frederico.curso = "Informática avançada";
+        	
+        	
+        });
+
+
+    </script>
+</body>
+</html>

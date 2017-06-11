@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Diretiva customizada</title>
+    <link href="../css/estilos.css" rel="stylesheet" />
+</head>
+
+<body ng-app="appAngular">
+    <h2>Rotas em Single Page App</h2>
+    <div>
+        <ul>
+            <li><a href="#/">Rota padrão (inicial)</a></li>
+            <li><a href="#/lista">Cursos</a></li>
+            <li><a href="#/desconhecida">Rota inexistente</a></li>
+        </ul>
+
+        <div class="borda" ng-view></div>
+
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.min.js"></script>
+    <script type="text/javascript">
+    angular.module('appAngular', ['ngRoute'])
+    	.config(['$routeProvider', function($routeProvider) {
+    		$routeProvider
+    			.when('/', {
+    				template: '<h2>Pagina Inicial</h2>'
+    			}) 
+    			.when('/lista', {
+    				templateUrl: '25_formularios_checkbox2.html'
+    			})
+    			.otherwise({redirectTo: '/'})
+    	}])
+    	.controller('Principal', [function() {
+    		var self = this;
+    		
+		    self.cursos = [
+		        { descricao: 'JAVA',selecionado: 'SIM' },
+		        { descricao: 'PHP', selecionado: 'NAO' },
+		        { descricao: '.NET', selecionado: 'NAO' }
+		    ];
+    		
+    	}])
+    	
+    	
+    
+    </script>
+</body>
+</html>

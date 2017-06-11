@@ -1,0 +1,14 @@
+﻿    <!-- conteúdo da view -->
+<h2>Quais cursos deseja realizar?</h2>
+<div ng-controller="Principal as ctl">
+    <form name="formCursos">
+        <div ng-repeat="curso in ctl.cursos">
+            <label>
+                {{curso.descricao}}
+                <input type="checkbox" ng-model="curso.selecionado" ng-true-value="'SIM'" ng-false-value="'NAO'">
+            </label>{{curso.selecionado}}<br />
+        </div>
+    </form>
+</div>
+
+

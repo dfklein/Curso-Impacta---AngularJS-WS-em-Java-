@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Diretiva ng-include</title>
+    <link href="../css/estilos.css" rel="stylesheet" />
+</head>
+
+<body ng-app="appAngular">
+    <h2>Uso da diretiva ng-include</h2>
+    <div ng-controller="Principal as ctl">
+        <h3>Lista de Produtos</h3>
+
+        <div ng-repeat="produto in ctl.produtos">
+            <div ng-include="ctl.produtoTemplate"></div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+
+    <script type="text/javascript">
+        angular.module('appAngular', [])
+          .controller('Principal', [function () {
+              var self = this;
+
+              self.produtos = [
+                  { descricao: 'Celular Samsung', preco: 1200, quantidade: 50 },
+                  { descricao: 'Cadeira reclinável', preco: 550, quantidade: 10 },
+                  { descricao: 'Tenis Nike', preco: 599, quantidade: 100 }
+              ];
+              self.produtoTemplate = '21 produtos.html';
+          }]);
+    </script>
+</body>
+</html>
