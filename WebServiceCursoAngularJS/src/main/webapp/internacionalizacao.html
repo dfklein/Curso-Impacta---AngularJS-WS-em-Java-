@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body ng-app="appAngular">
+
+	<div ng-controller="Principal as ctl">
+<!-- 		<h2>{{periodStart | date:'mediumDate'}}</h2> -->
+	</div>
+
+<!-- 	Baixar o angularJS em: https://code.angularjs.org/1.6.4/ -->
+	<script src="js/angular.js"></script>
+	<script src="js/angular-route.js"></script>
+	<script src="js/angular-cookies.js"></script>
+	<script src="js/jquery-3.2.1.js"></script>
+	
+<!-- 	Se você importar apenas uma localidade, pode apenas inserir o script como na linha comentada abaixo: -->
+<!-- 	<script src="js/i18n/angular-locale_pt-br.js"></script> --> 
+
+    <script type="text/javascript">
+	
+    angular.module('appAngular', ['ngRoute', 'ngResource', 'ngCookies'])
+    	
+    	.controller('Principal',['$scope', '$cookies', function ($scope, $cookies) {
+			// Aqui você fará uma lógica para verificar se a localidade é BR e trazer o seu script. Se não for, trará o script da localidade EN.
+			var language = navigator.language;
+		        if(language == 'pt-BR'){
+		        	// verificar se há como fazer isso sem o JQuery
+		            $.getScript('js/i18n/angular-locale_pt-br.js');
+		        }
+		        else{
+		            $.getScript('js/i18n/angular-locale_en.js');
+		        }
+		
+	
+    	}])
+    
+    </script>
+</body>
+</html>
