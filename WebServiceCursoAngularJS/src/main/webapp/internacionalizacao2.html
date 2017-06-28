@@ -5,6 +5,7 @@
 <title>Insert title here</title>
 <!-- ********************************************************************** -->
 <!-- Baseado no exemplo mencionado em: https://angular-translate.github.io/ -->
+<!-- doc https://angular-translate.github.io/docs/#/guide/07_multi-language -->
 <!-- ********************************************************************** -->
 	<script src="../WebServiceRest/js/angular.js"></script>
 	<script src="../WebServiceRest/js/angular-route.min.js"></script>
@@ -15,7 +16,13 @@
 	<script src="../WebServiceRest/js/angular-translate.min.js"></script>
 	
 	<script type="text/javascript">
-	angular.module('appAngular', ['ngRoute', 'ngCookies'])
+	
+	
+	angular.module('appAngular', [
+		'ngRoute', 
+		'ngCookies', 
+		'pascalprecht.translate'
+	])
 	
 	.config(function ($translateProvider) {
 		$translateProvider.translations('en', {
@@ -33,8 +40,12 @@
 		  $translateProvider.preferredLanguage('en');
 	})
 	
-	.controller('Principal',['$scope', '$cookies', function($scope, $translate) {
+	.controller('Principal',['$scope', '$translate', function($scope, $translate) {
 		
+		$scope.changeLanguage = function (key) {
+		    $translate.use(key);
+		  };
+		  
 	}]) 
 		
 	
@@ -45,6 +56,7 @@
 <body ng-app="appAngular">
 
 	<div ng-controller="Principal as ctl">
+		<div translate>TITLE</div>
 	
 	</div>
 </body>
