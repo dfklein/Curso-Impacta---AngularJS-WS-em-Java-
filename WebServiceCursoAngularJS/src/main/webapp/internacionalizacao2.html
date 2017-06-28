@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<!-- ********************************************************************** -->
+<!-- Baseado no exemplo mencionado em: https://angular-translate.github.io/ -->
+<!-- ********************************************************************** -->
+	<script src="../WebServiceRest/js/angular.js"></script>
+	<script src="../WebServiceRest/js/angular-route.min.js"></script>
+	<script src="../WebServiceRest/js/angular-cookies.min.js"></script>
+	<script src="../WebServiceRest/js/jquery-3.2.1.min.js"></script>
+	
+<!--Baixar o Translate em:	http://localhost:8080/WebServiceRest/internacionalizacao2.html -->
+	<script src="../WebServiceRest/js/angular-translate.min.js"></script>
+	
+	<script type="text/javascript">
+	angular.module('appAngular', ['ngRoute', 'ngCookies'])
+	
+	.config(function ($translateProvider) {
+		$translateProvider.translations('en', {
+		    TITLE: 'Hello',
+		    FOO: 'This is a paragraph.',
+		    BUTTON_LANG_EN: 'english',
+		    BUTTON_LANG_DE: 'german'
+		  });
+		  $translateProvider.translations('de', {
+		    TITLE: 'Hallo',
+		    FOO: 'Dies ist ein Paragraph.',
+		    BUTTON_LANG_EN: 'englisch',
+		    BUTTON_LANG_DE: 'deutsch'
+		  });
+		  $translateProvider.preferredLanguage('en');
+	})
+	
+	.controller('Principal',['$scope', '$cookies', function($scope, $translate) {
+		
+	}]) 
+		
+	
+	
+	</script>
+	
+</head>
+<body ng-app="appAngular">
+
+	<div ng-controller="Principal as ctl">
+	
+	</div>
+</body>
+</html>

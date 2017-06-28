@@ -30,7 +30,7 @@
         
     angular.module('appAngular', ['ngRoute', 'ngCookies'])
     
-    	.service('translationService', function($resource) {
+    	.service('TranslationService', function($resource) {
 		        
     		this.getTranslation = function($scope, language) {
     			alert(language);
@@ -41,13 +41,12 @@
             };
          })
     	
-    	.controller('Principal',['$scope', '$cookies', function ($scope, $cookies, translationService) {
+    	.controller('Principal',['$scope', '$cookies', function ($scope, $cookies, TranslationService) {
 		    
 		    $scope.periodStart = Date();
 		    $scope.texto = 'texto';
 		    
-		    translationService.getTranslation($scope, $cookies.lang);
-		
+// 		    TranslationService.getTranslation($scope, $cookies.lang);
 	
     	}])
     
