@@ -7,50 +7,16 @@
 <!-- Baseado no exemplo mencionado em: https://angular-translate.github.io/ -->
 <!-- doc https://angular-translate.github.io/docs/#/guide/07_multi-language -->
 <!-- ********************************************************************** -->
-	<script src="../WebServiceRest/js/angular.js"></script>
-	<script src="../WebServiceRest/js/angular-route.min.js"></script>
-	<script src="../WebServiceRest/js/angular-cookies.min.js"></script>
-	<script src="../WebServiceRest/js/jquery-3.2.1.min.js"></script>
+<!-- 	<script src="../WebServiceRest/js/angular-route.min.js"></script> -->
+
+	<script src="./js/angular.js"></script>
+	<script src="./js/angular-route.min.js"></script>
+	<script src="./js/angular-cookies.min.js"></script>
+	<script src="./js/jquery-3.2.1.min.js"></script>
+	<script src="./js/internacionalizacao2-controller.js"></script>
 	
 <!--Baixar o Translate em:	http://localhost:8080/WebServiceRest/internacionalizacao2.html -->
-	<script src="../WebServiceRest/js/angular-translate.min.js"></script>
-	
-	<script type="text/javascript">
-	
-	
-	angular.module('appAngular', [
-		'ngRoute', 
-		'ngCookies', 
-		'pascalprecht.translate'
-	])
-	
-	.config(function ($translateProvider) {
-		$translateProvider.translations('en', {
-		    TITLE: 'Hello',
-		    FOO: 'This is a paragraph.',
-		    BUTTON_LANG_EN: 'english',
-		    BUTTON_LANG_DE: 'german'
-		  });
-		  $translateProvider.translations('de', {
-		    TITLE: 'Hallo',
-		    FOO: 'Dies ist ein Paragraph.',
-		    BUTTON_LANG_EN: 'englisch',
-		    BUTTON_LANG_DE: 'deutsch'
-		  });
-		  $translateProvider.preferredLanguage('en');
-	})
-	
-	.controller('Principal',['$scope', '$translate', function($scope, $translate) {
-		
-		$scope.changeLanguage = function (key) {
-		    $translate.use(key);
-		  };
-		  
-	}]) 
-		
-	
-	
-	</script>
+	<script src="./js/angular-translate.min.js"></script>
 	
 </head>
 <body ng-app="appAngular">

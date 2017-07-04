@@ -9,10 +9,10 @@
 <!-- **************************************** -->
 
 <!-- 	Baixar o angularJS em: https://code.angularjs.org/1.6.4/ -->
-	<script src="../WebServiceRest/js/angular.js"></script>
-	<script src="../WebServiceRest/js/angular-route.min.js"></script>
-	<script src="../WebServiceRest/js/angular-cookies.min.js"></script>
-	<script src="../WebServiceRest/js/jquery-3.2.1.min.js"></script>
+	<script src="./js/angular.js"></script>
+	<script src="./js/angular-route.min.js"></script>
+	<script src="./js/angular-cookies.min.js"></script>
+	<script src="./js/jquery-3.2.1.min.js"></script>
 	
 <!-- 	Se você importar apenas uma localidade, pode apenas inserir o script como na linha comentada abaixo: -->
 <!-- 	<script src="js/i18n/angular-locale_pt-br.js"></script> --> 
@@ -20,13 +20,13 @@
     <script type="text/javascript">
 
  // Aqui você fará uma lógica para verificar se a localidade é BR e trazer o seu script. Se não for, trará o script da localidade EN.
-		language = navigator.language;
-	        if(language == 'pt-BR'){
-	        	// verificar se como fazer isso sem o JQuery
-	            $.getScript('js/i18n/angular-locale_pt-br.js');
-	        } else {
-	            $.getScript('js/i18n/angular-locale_en.js');
-	        }
+	language = navigator.language;
+        if(language == 'pt-BR'){
+        	// verificar se como fazer isso sem o JQuery
+            $.getScript('js/i18n/angular-locale_pt-br.js');
+        } else {
+            $.getScript('js/i18n/angular-locale_en.js');
+        }
         
     angular.module('appAngular', ['ngRoute', 'ngCookies'])
     
@@ -35,13 +35,13 @@
     		this.getTranslation = function($scope, language) {
     			alert(language);
                 var languageFilePath = 'http://localhost:8080/WebServiceRest/translations/translation_pt_br.json';
-                $resource(languageFilePath).get(function (data) {
+                $resource(languageFilePath).get(function(data) {
                     $scope.translation = data;
                 });
             };
          })
     	
-    	.controller('Principal',['$scope', '$cookies', function ($scope, $cookies, TranslationService) {
+    	.controller('Principal',['$scope', '$cookies', function($scope, $cookies, TranslationService) {
 		    
 		    $scope.periodStart = Date();
 		    $scope.texto = 'texto';
