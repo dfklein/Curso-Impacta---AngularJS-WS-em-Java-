@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  
+  <!-- Angular Material style sheet -->
+<style>
+.caixa {
+  border: 1px;
+  border-style: solid;
+  border-color: grey;
+  margin: 5px;
+}
+
+form.ng-submitted input.ng-invalid {
+	border-color: red !important;
+}
+
+form.ng-submitted .caixa-invalida {
+	border-color: red !important;	
+}
+
+</style>
+</head>
+<body ng-app="BlankApp">
+  <form novalidate name="form">
+    <div ng-controller="meuController">
+      <div >
+        <div class="row">
+          <div class="col-md-6">
+            <input type="text" name="inp" class="form-control" ng-required="true" ng-model="texto" ng-class="ng-invalid" />valid: {{form.inp.$valid}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="caixa" ng-class="{'caixa-invalida' : form.inp.$invalid}" >
+              <span>texto 1</span>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="caixa">
+              <span>texto 1</span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-9">
+          </div>
+          <div class="col-md-3">
+          <button type="submit" class="btn btn-default" ng-click="alerta();">Submit</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  
+  <!-- Angular Material requires Angular.js Libraries -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.js"></script>
+  
+  <!-- Your application bootstrap  -->
+  <script type="text/javascript">    
+    /**
+     * You must include the dependency on 'ngMaterial' 
+     */
+    var app = angular.module('BlankApp', []);
+    app.controller('meuController', ['$scope', function($scope) {
+      $scope.alerta = function() {
+      	console.log($scope.form.$submitted);
+      	console.log($scope.form);
+      }
+      $scope.opcoes = [
+        {'id':1, 'nome':'João'},
+        {'id':2, 'nome':'Pedrão'},
+        {'id':3, 'nome':'Fredão'},
+      ];
+    }]);
+  </script>
+  
+</body>
+</html>

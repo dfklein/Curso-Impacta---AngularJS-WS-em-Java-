@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Diretiva customizada</title>
+    
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <link href="css/addon/effect-light.min.css" rel="stylesheet" />
+    <link href="css/quantumui.min.css" rel="stylesheet" />
+ <!-- Veja a documentação do select em http://quantumui.org/appdoc/documents/quantumui/select/ -->
+</head>
+
+<body ng-app="appAngular">
+	<div ng-controller="Principal as ctrl">
+	<h2>{{teste}}</h2>
+	
+    <div>
+    	<select name="staticSelectModel" data-nq-select="" data-qo-placeholder="static select options" data-ng-model="staticSelectModel" ng-options="city.id as city.city group by city.state for city in citiesArray">
+                                    
+                                </select>
+    </div>
+    
+    
+	<!--
+	<div class="col-sm-6">
+          <div data-qo-display-type="input" data-qo-nav-class="nav-warning" data-nq-select="" data-nq-options="ctrl.city.id as city.city group by city.state for city in citiesArray" data-placeholder="input ng options" data-ng-model="displayInputNgOption"></div>
+    </div>
+    -->
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.js"></script>
+        
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-sanitize.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-animate.min.js"></script>
+    <script src="js/quantumui-all.min.js"></script>
+    <script src="config/icons.js"></script>
+
+
+	
+    <script type="text/javascript">
+		var app = angular.module('appAngular', [
+			'ngSanitize',
+        	'ngAnimate',
+        	'ngQuantum']);
+
+		app.controller('Principal', ['$scope', function($scope) {
+			$scope.teste='teste ok';
+
+			$scope.array = ['banana', 'limão', 'maçã'];
+
+			$scope.citiesArray = [
+				{'id':1, 'state':'SP', 'city':'São Paulo'},
+				{'id':2, 'state':'SP', 'city':'Bauru'},
+				{'id':3, 'state':'SP', 'city':'Araraquara'},
+				{'id':4, 'state':'SP', 'city':'Osasco'},
+				{'id':5, 'state':'RS', 'city':'Porto Alegre'},
+				{'id':6, 'state':'RS', 'city':'Caxias do Sul'}
+			];
+
+			console.log($scope.citiesArray);
+
+		}]);
+		
+			
+    </script>
+</body>
+</html>
